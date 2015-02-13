@@ -4,6 +4,19 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+# Provision Shell Scripts
+$provScript = <<SCRIPT
+# Dependencies
+sudo pacman -Sy community-testing/nodejs --needed --noconfirm
+sudo npm install -g duo
+SCRIPT
+
+$updateScript = <<SCRIPT
+# System Update
+sudo pacman -Syu --noconfirm
+npm update -g
+SCRIPT
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
@@ -56,6 +69,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
 
+  config.vm.provision "bootstrap", type: "shell" do |sh|
+    sh.inline = $provScript
+  end
+
+  #config.vm.provision "update", type: "shell", run: "always" do |sh|
+    #sh.inline = $updateScript
+  #end
   # Enable provisioning with CFEngine. CFEngine Community packages are
   # automatically installed. For example, configure the host as a
   # policy server and optionally a policy file to run:
