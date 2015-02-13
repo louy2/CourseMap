@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 # Provision Shell Scripts
 $provScript = <<SCRIPT
-# Dependencies
+# Use community-testing nodejs for newest version
 sudo pacman -Sy community-testing/nodejs --needed --noconfirm
 sudo npm install -g duo
 SCRIPT
