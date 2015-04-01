@@ -1,0 +1,19 @@
+Figured I'd post this in case anyone else is still having trouble keeping their forks up to date
+
+HOW TO KEEP YOUR FORK UPDATED
+
+-Open CourseMap locally in GitHub using Git Shell
+
+-type the following: git remote add upstream https://github.com/louy2/coursemap
+	this will add a remote called upstream, which will go to youfan's coursemap
+
+-type the following: git fetch upstream
+	this will fetch all of the branches of youfan's (our master)
+	
+-type the following: checkout master
+	this will give you the master branch
+	
+-type the following: git rebase upstream/master
+	this will rewrite YOUR master branch so your commits will be replayed at the top
+	
+	
