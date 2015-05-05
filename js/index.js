@@ -8,7 +8,7 @@ var coursemap = {
 			edges:[]
 		};
 
-for (var i = 0; i < 9; i++) {
+for (var i = 0; i < 100; i++) {
 	radius[i] = 15 + 10 * i;
 	li[i] = 0;
 }
@@ -25,9 +25,9 @@ oboe('http://yacs.me/api/4/courses/?semester_id=85363')
   .node({
 		// Process each course as it arrives
 		'result[*]': function(course){
-			ln = Math.floor(course.number / 1000) - 1;
+			ln = Math.floor(course.number / 100) - 1;
 			if (ln < 0) {
-				ln = Math.floor(course.number / 10) - 1;
+				ln = Math.floor(course.number / 1) - 1;
 			}
 			// Add the current node
 			coursemap.nodes.push({
