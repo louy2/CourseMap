@@ -1,6 +1,5 @@
 // Radius of layers according to course level
 var radius = [];
-var ln;
 var li = [];
 var s;
 var coursemap = {
@@ -25,17 +24,23 @@ oboe('http://yacs.me/api/4/courses/?semester_id=85363')
   .node({
 		// Process each course as it arrives
 		'result[*]': function(course){
-			ln = Math.floor(course.number / 1000) - 1;
-			if (ln < 0) {
-				ln = Math.floor(course.number / 10) - 1;
+
+      // Calculate layer and sublayer from course code
+			var layerNumber = Math.floor(course.number / 1000) - 1;
+      var subLayerNumber = Math.floor(course.number / 100) - layerNumber * 10 - 1;
+			if (layerNumber < 0) {
+				layerNumber = Math.floor(course.number / 10) - 1;
+        subLayerNumber = course.number - layerNumber * 10 - 1;
 			}
-			// Add the current node
+
+			// Add the current course node
 			coursemap.nodes.push({
 				type: 'course',
 				id: 'n'+course.id,
-				x: ln,
-				y: li[ln],
-				layer: ln,
+				x: layerNumber,
+				y: li[layerNumber],
+				layer: layerNumber,
+        sublayer: subLayerNumber,
 				layerIndex: li[ln]++,
 				size: 1,
 				strokeColor: '#222',
