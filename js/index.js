@@ -27,7 +27,7 @@ oboe('http://yacs.me/api/4/courses/?semester_id=85363')
 		'result[*]': function(course){
 			ln = Math.floor(course.number / 100) - 1;
 			if (ln < 0) {
-				ln = Math.floor(course.number / 1) - 1;
+				ln = Math.floor(course.number) - 1;
 			}
 			// Add the current node
 			coursemap.nodes.push({
